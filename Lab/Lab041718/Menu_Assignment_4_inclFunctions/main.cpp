@@ -1,8 +1,8 @@
 /* 
  * File:   main.cpp
  * Author: Elise Chue
- * Created on April 3, 2018, 5:29 PM
- * Purpose: menu for Assignment 4
+ * Created on April 17, 2018, 12:20 PM
+ * Purpose: menu for Assignment 4 now including FUNCTIONS
  */
 
 //System Libraries Here
@@ -19,16 +19,53 @@ using namespace std;
 //Math, Physics, Science, Conversions, 2-D Array Columns
 
 //Function Prototypes 
-
+void menu();
+void prblm1();
+void prblm2();
+void prblm3();
+void prblm4();
+void prblm5();
+void prblm6();
+void prblm7();
+void prblm8();
+void prblm9();
 //Program Execution Begins Here
 
 int main(int argc, char** argv) {
     //Declare Variables
-    char choice,//choice for each problem
-         menu;  //return to main menu
+    char choice;//choice for each problem
     
-    //Display Menu options
- do{
+    //Loop and Display Menu options
+    do{
+        menu();        
+        cin>>choice;
+
+    //process output
+        switch(choice){
+            case '1':{prblm1();break;} 
+            case '2':{prblm2();break;}
+            case '3':{prblm3();break;}
+            case '4':{prblm4();break;}
+            case '5':{prblm5();break;}
+            case '6':{prblm6();break;}
+            case '7':{prblm7();break;}
+            case '8':{prblm8();break;}
+            case '9':{prblm9();break;}
+            default:cout<<"Exiting Menu"<<endl;
+        }
+    }while(choice>='1'&&choice<='9');
+    //Exit Program!
+    
+    return 0;
+}
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+//                              Menu
+//input: -> Parameters in Argument List, Description/Range/
+//output:-> 
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+//345678901234567890123456789012345678901234567890123456789012345678901234567890
+void menu(){
     cout<<"Choose from the following programs "
         <<"all of which were curated from "<<endl;
     cout<<"Ch 4 of the Savitch 9th ed. textbook "<<endl;
@@ -41,13 +78,14 @@ int main(int argc, char** argv) {
     cout<<"Type 6 for Practice Program 5: Year Later Price Inflation"<<endl;
     cout<<"Type 7 for Practice Program 7: Attraction between Bodies"<<endl;
     cout<<"Type 8 for Programming Project 2: Clothing Size Calculator"<<endl;
-    cout<<"Type 9 for Programming Project 6: Twinkie Vending Machine"<<endl;        
-    cin>>choice;
-
-    //process output
-    if(choice>='1'&&choice<='9'){
-        switch(choice){
-            case '1':{
+    cout<<"Type 9 for Programming Project 6: Twinkie Vending Machine"<<endl;
+}
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+//                           Problem 1
+//input: -> Parameters in Argument List, Description/Range/
+//output:-> 
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+void prblm1(){
                 cout<<"Gaddis Problem 7: Pennies for Pay"<<endl;
                 //Declare Variables 
                 unsigned int totPay,
@@ -68,9 +106,13 @@ int main(int argc, char** argv) {
                     pyPrDay*=2;
                     totPay+=pyPrDay;
                 }
-               break; 
-            }
-            case '2':{
+}
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+//                           Problem 2
+//input: -> Parameters in Argument List, Description/Range/
+//output:-> 
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+void prblm2(){
                 cout<<"Practice Program 1: Miles Per Gallon"<<endl;
                 //Declare all Variables, no doubles
                 const float LTRTOGAL=0.2641f;   //1 liter is /that/ gallons
@@ -94,9 +136,13 @@ int main(int argc, char** argv) {
                 cout<<"Would you like to repeat the program? Y/N"<<endl;
                 cin>>rep;
                 }while (rep=='y'||rep=='Y');
-                break;
-            }
-            case '3':{
+}
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+//                           Problem 3
+//input: -> Parameters in Argument List, Description/Range/
+//output:-> 
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+void prblm3(){
                 cout<<"Practice Program 2: Miles Per Gallon w/ 2 cars"<<endl;
                 //Declare all Variables, no doubles
                 const float LTRTOGAL=0.2641f;   //1 liter is /that/ gallons
@@ -141,10 +187,14 @@ int main(int argc, char** argv) {
                 cout<<"Would you like to repeat the program? Y/N"<<endl;
                 cin>>rep;
                 }while (rep=='y'||rep=='Y');
-                break;
-            }
-            case '4':{
-                cout<<"Practice Program 3: Stocks"<<endl;
+}
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+//                           Problem 4
+//input: -> Parameters in Argument List, Description/Range/
+//output:-> 
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+void prblm4(){
+                    cout<<"Practice Program 3: Stocks"<<endl;
                 //initialize random seed
                srand(static_cast<unsigned int>(time(0)));
 
@@ -179,10 +229,14 @@ int main(int argc, char** argv) {
                cout<<"Would you like to continue? Y/N "<<endl;
                cin>>again;
                }while(again=='Y'||again=='y');
-                break; 
-            }
-            case '5':{
-                cout<<"Practice Program 4: Past Year Inflation"<<endl;
+}
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+//                           Problem 5
+//input: -> Parameters in Argument List, Description/Range/
+//output:-> 
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+void prblm5(){
+    cout<<"Practice Program 4: Past Year Inflation"<<endl;
                 //Declare all Variables, no doubles
                 float yearAgo,  //price of item a year ago
                         today,  //price of item today
@@ -207,10 +261,14 @@ int main(int argc, char** argv) {
                     cout<<"Would you like to repeat the program? Y/N"<<endl;
                     cin>>rep;
                 }while (rep=='y'||rep=='Y');
-                break; 
-            }
-            case '6':{
-                cout<<"Practice Program 5: Year Later Price Inflation"<<endl;
+}
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+//                           Problem 6
+//input: -> Parameters in Argument List, Description/Range/
+//output:-> 
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+void prblm6(){
+                    cout<<"Practice Program 5: Year Later Price Inflation"<<endl;
                 //Declare all Variables, no doubles
                 float yearAgo,  //price of item a year ago
                         today,  //price of item today
@@ -243,10 +301,14 @@ int main(int argc, char** argv) {
                     cout<<"Would you like to repeat the program? Y/N"<<endl;
                     cin>>rep;
                 }while (rep=='y'||rep=='Y');
-                break;
-            }
-            case '7':{
-                cout<<"Practice Program 7: Attraction between Bodies"<<endl;
+}
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+//                           Problem 7
+//input: -> Parameters in Argument List, Description/Range/
+//output:-> 
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+void prblm7(){
+                    cout<<"Practice Program 7: Attraction between Bodies"<<endl;
                 const float GRAVITY=6.673e-8f;  //cm^3/g/sec^2
                 const float CMMETER=0.01f;      //cm to meters
                 const float METERFT=3.281f;      //meters to ft
@@ -274,10 +336,14 @@ int main(int argc, char** argv) {
                                 //you are on earth in this case
                cout<<myMass<<" slugs = "<<myWt<<" lbs"<<endl;
                cout<<myMass<<" slugs = "<<myWtCnv<<" lbs"<<endl;
-               break; 
-            }
-            case '8':{
-                cout<<"Programming Project 2: Clothing Size Calculator"<<endl;
+}
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+//                           Problem 8
+//input: -> Parameters in Argument List, Description/Range/
+//output:-> 
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+void prblm8(){
+                  cout<<"Programming Project 2: Clothing Size Calculator"<<endl;
                 //Declare all Variables, no doubles
                 float ht,   //height in inches
                      wt,   //weight in pounds
@@ -311,10 +377,14 @@ int main(int argc, char** argv) {
                    cout<<"Would you like to repeat the program? Y/N"<<endl;
                    cin>>rep;
                 }  while (rep=='y'||rep=='Y');
-                break; 
-            }
-            case '9':{
-                cout<<"Programming Project 6: Twinkie Vending Machine"<<endl;
+}
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+//                           Problem 9
+//input: -> Parameters in Argument List, Description/Range/
+//output:-> 
+//000000000011111111112222222222333333333344444444445555555555666666666677777777
+void prblm9(){
+                   cout<<"Programming Project 6: Twinkie Vending Machine"<<endl;
                 //Declare all Variables, no doubles
                 int coin,   //takes only nickel, dime, quarter, or dollar amounts
                    total,  //on going total of given coins
@@ -345,18 +415,5 @@ int main(int argc, char** argv) {
                    cout<<"Would you like another Twinkie? Y/N"<<endl;
                    cin>>rep;
                 } while (rep=='y'||rep=='Y');
-                break;
-            }
-        }
-        
-    }else{
-        cout<<"Exiting Menu"<<endl;
-    }
-    cout<<"Would you like to go to the main menu? Y/N"<<endl;
-    cin>>menu;
- }while(menu=='y'||menu=='Y');
-  
-    //Exit Program!
-    
-    return 0;
 }
+
