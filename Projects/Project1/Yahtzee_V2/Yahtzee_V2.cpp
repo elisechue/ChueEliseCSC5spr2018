@@ -12,7 +12,7 @@
 #include <ctime>    //setting time for random num generator
 #include <iomanip>  //setw
 #include <cstring>  //string objects
-#include <cmath>    //use pow 
+#include <cmath>    //used pow 
 #include <fstream>  //input output files
 using namespace std;
 
@@ -32,6 +32,7 @@ int main(int argc, char** argv) {
     //Declare all Variables, no doubles 
     int die1, die2, die3, die4, die5;   //dice face values = [1,6]
     char rd1,rd2,rd3,rd4,rd5;       //choose which dice to reroll /keep
+    int combo,points; //combination of dice the player has, allot points
     char turn;                      //choose to do another turn
     int totPnts=0;      //accumulated points down the line
     short totTurn;
@@ -184,7 +185,7 @@ do{
         cout<<"Type 11 to score for a LARGE STRAIGHT (40 points)"<<endl;
         cout<<"Type 12 to score for a YAHTZEE        (50 points)"<<endl;
         cout<<"Type 13 to score for   CHANCE         (add all 5 dice)"<<endl;
-        int combo,points; //combination of dice the player has, allot points
+        
         cin>>combo;
         cout<<endl;
         //process input 
@@ -296,7 +297,8 @@ do{
                 }                
             }
         }else{
-         cout<<"Exiting Menu"<<endl;
+         cout<<"Invalid Input"<<endl;//prevents infinite loops caused by 
+         return 0;//inputting too many charas which bleed over to cin>>combo
          }
     }
     cout<<"Would you like to try one more Turn? (Y/N)"<<endl;
@@ -308,7 +310,7 @@ do{
     out<<"Each dice has a 1/6 chance of turning up #1-6"<<endl;
     out<<"Given the first dice is the number you want to match:"<<endl;
     float prob;         //probability of yahtzee in one roll (decimal)
-    prob=pow((1.0f/6),4);
+    prob=pow((static_cast<float>(1)/6),4);
     out<<"That comes out to (1/6)^4 (the expo. being the remaining 4 dice)"
             " = "<<prob<<endl;
     out<<"which equates to "<<setprecision(1)<<prob*100<<"% chance"<<endl;
