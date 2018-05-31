@@ -35,48 +35,53 @@ int main(int argc, char** argv) {
     
     //Initialize Variables
     Array1D *array=fillAry(size);
-    int **array2=fillAry(rows,cols);
+    Array2D *array2=fillAry(rows,cols);
     
     //Print the Array
     prntAry(array,10);
-    prntAry(array2,rows,cols);
+    prntAry(array2);
     
     //Clean up
     delete []array->data;   //data within the structure is the array
     delete array;           //structure 
     //De-Allocate columns
     for(int row=0;row<rows;row++){
-        delete []array2[row];
+        delete []array2->data[row];
     }
     //De-Allocate the rows
-    delete []array2;
+    delete []array2->data;
+    delete array2;
     
     //Exit stage right!
     return 0;
 }
 
-void prntAry(int **a,int rows,int cols){
+void prntAry(Array2D *a){
     cout<<endl;
-    for(int row=0;row<rows;row++){
-        for(int col=0;col<cols;col++){
-            cout<<a[row][col]<<" ";
+    for(int row=0;row<a->row;row++){
+        for(int col=0;col<a->col;col++){
+            cout<<a->data[row][col]<<" ";
         }
         cout<<endl;
     }
     cout<<endl;
 }
 
-int **fillAry(int rows,int cols){
+Array2D *fillAry(int rows,int cols){
+    //Allocate the structure
+    Array2D *a=new Array2D;
     //Allocate rows
-    int **a=new int*[rows];
+    a->row=rows;
+    a->col=cols;
+    a->data=new int*[rows];
     //Allocate columns
     for(int row=0;row<rows;row++){
-        a[row]=new int[cols];
+        a->data[row]=new int[cols];
     }
     //Fill the array
     for(int row=0;row<rows;row++){
         for(int col=0;col<cols;col++){
-            a[row][col]=rand()%90+10;
+            a->data[row][col]=rand()%90+10;
         }
     }
     return a;

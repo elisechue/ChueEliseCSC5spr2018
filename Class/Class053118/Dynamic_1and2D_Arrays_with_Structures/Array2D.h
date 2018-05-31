@@ -15,5 +15,5 @@ struct Array2D{
 };
 
 
-#endif /* ARRAY1D_H */
+#endif /* ARRAY2D_H */
 
