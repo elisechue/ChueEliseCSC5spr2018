@@ -1,12 +1,13 @@
 /* 
  * File:   main.cpp
  * Author: Elise Chue
- * Created on May 20, 2018, 11:20 PM
- * Purpose: FirstLast2 
+ * Created on May 27, 2018, 9:02 PM
+ * Purpose: FirstLast2 w/vectors
  */
 
 //System Libraries Here
 #include <iostream>
+#include <vector>
 using namespace std;
 
 //User Libraries Here
@@ -34,14 +35,18 @@ int main(int argc, char** argv) {
 }
 
 void fstLst2(){
-    int SIZE;
-    int array[SIZE];
-    cout<<"Input a size for the array"<<endl;
-    cin>>SIZE;
-    cout<<"Input integer(s) to be stored in the array"<<endl;
-    for(int n=0;n<SIZE;n++){
-        cin>>array[n];
-    }
-    if(array[0]==2||array[SIZE-1]==2)cout<<"true"<<endl;  //this returns/says true (just "return true" would cout nothing)
+    vector <int> vector;
+    char repeat;
+    int x=0;
+    int input;
+    
+    do{
+        cout<<"Enter an integer for the vector"<<endl;
+        cin>>input;
+        vector.push_back(input);x++;          //makes room for more integers as we add on x this acts like our SIZE in the array version
+        cout<<"Do you want to add another integer? Y/N"<<endl;
+        cin>>repeat;
+    }while(repeat=='y'||repeat=='Y');
+    if(vector[0]==2||vector[x-1]==2)cout<<"true"<<endl;  //this returns/says true (just "return true" would cout nothing)
     else cout<<"false"<<endl;
 }
