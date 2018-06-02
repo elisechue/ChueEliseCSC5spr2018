@@ -1,0 +1,5 @@
+Let's calculate the odds of getting a Yahtzee in 1 roll!
+Each dice has a 1/6 chance of turning up #1-6
+Given the first dice is the number you want to match:
+That comes out to (1/6)^4 (the expo. being the remaining 4 dice) = 0.000771605
+which equates to 0.08% chance
