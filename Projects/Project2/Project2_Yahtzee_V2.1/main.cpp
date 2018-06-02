@@ -22,12 +22,12 @@ using namespace std;
 const int PLAYERS=2;    //FOR 2D ARRAY COLUMN SIZE I SWEAR
 
 //Function Prototypes 
-void roll(int [],int);//input 1 position and roll that die
-void display(int [],int,int=0);//displays the 5 dice
-void sort(int [],int);//sorts dice via mikeSort
-void sort(int [],int,char); //a select sort function to showcase overload concept
-void reRoll(int []);//inputs which dice are going to be rerolled
-void menu();//displays categories for scoring
+void roll(int [],int);          //input 1 position and roll that die
+void display(int [],int,int=0); //displays the 5 dice
+void sort(int [],int);          //sorts dice via markSort which is very similar to bubble sort
+void sort(int [],int,char);     //a select sort function to showcase overload concept
+void reRoll(int []);            //inputs which dice are going to be rerolled
+void menu();                    //displays categories for scoring
 void scoring(int [],int,int [],int,bool [][PLAYERS]);           //does actual scoring
 void scorBrd(vector < int >,vector < int >,vector < int >);     //prints out score each round
 bool chknDin(int [],int,int);//winner winner chicken dinner
@@ -39,50 +39,50 @@ int main(int argc, char** argv) {
      srand(static_cast<unsigned int>(time(0)));
      //Declare all Variables, no doubles
      char replay;   //choose to replay the game
-    ifstream in;//Input File stream
-    ofstream out;//output file
+    ifstream in;    //Input File stream
+    ofstream out;   //output file
     string fileIn;  //file name
-    char fileOut[]="Trivia.dat";    //uses cmath, calculates, and shows in out file 
+    char fileOut[]="Trivia.dat";  //uses cmath, calculates, and shows in out file 
     fileIn="Rounds.dat";        //will input the totRnd (total rounds that will be played in a game)
     in.open(fileIn.c_str());
     out.open(fileOut);
      do{
          const int NUMDICE=5;      //num of dice used for the entire game is 5
-         const int OPTIONS=13;//number of options to score your roll
-         int p1Dice[NUMDICE];//array of 5 dice for player 1
-         int p2Dice[NUMDICE];//array of 5 dice for player 2
+         const int OPTIONS=13;  //number of options to score your roll
+         int p1Dice[NUMDICE];   //array of 5 dice for player 1
+         int p2Dice[NUMDICE];   //array of 5 dice for player 2
          int score[PLAYERS]={0,0};//player's score array position is 0 for player 1, 1 for player 2
-         int player1=0;//used for calling functions
-         int player2=1;//used for calling functions
+         int player1=0; //used for calling functions
+         int player2=1; //used for calling functions
          bool oneTry [OPTIONS][PLAYERS] = { };
-         vector < int > numRnds;//vector to count the number of rounds
-         vector < int > p1RndPt;//points at end of round for player 1
-         vector < int > p2RndPt;//points at end of round for player 2
+         vector < int > numRnds;    //vector to count the number of rounds
+         vector < int > p1RndPt;    //points at end of round for player 1
+         vector < int > p2RndPt;    //points at end of round for player 2
          bool tie=false;
          int totRnd;    //file is set for 13 rounds (2 for testing purposes)
          
         //Input or initialize values
          in>>totRnd;
-         for(float round=0;round<totRnd;round++){
+         for(float round=0;round<totRnd;round++){   //Increments the amount of Rounds played
             //Roll the first set for player 1
-             cout<<"         PLAYER 1       "<<endl;
-             cout<<"         Round "<<round+1<<endl;
-            for(int i=0;i<NUMDICE;i++){
+             cout<<"         PLAYER 1       "<<endl;    
+             cout<<"         Round "<<round+1<<endl; //Displays which round youre on
+            for(int i=0;i<NUMDICE;i++){             //rolls 5 dice
                roll(p1Dice,i);
             }
             //Sort p1Dice
-            sort(p1Dice,NUMDICE);
-            //display p1 Dice
+            sort(p1Dice,NUMDICE);       //sorts the dice smallest to highest 
+            //display p1 Dice           //so its easier to see what you have going for you
             display(p1Dice,NUMDICE);
 
             //reroll p1 Dice
-            for(int i=1;i<=2;i++){//two turns to reroll p1Dice
-               reRoll(p1Dice);//reroll
-               sort(p1Dice,NUMDICE);//sort
+            for(int i=1;i<=2;i++){  //two turns to reroll p1Dice
+               reRoll(p1Dice);  //reroll
+               sort(p1Dice,NUMDICE);    //sort
                display(p1Dice,NUMDICE,player1);//display
             }
             //menu and scoring for p1
-            menu();
+            menu();             //calls the score category menu function
             scoring(p1Dice,NUMDICE,score,player1,oneTry);
             cout<<endl<<"Your score is: "<<score[player1]<<endl<<endl;
 
@@ -93,18 +93,18 @@ int main(int argc, char** argv) {
                roll(p2Dice,i);
             }
             //Sort p2Dice
-            sort(p2Dice,NUMDICE,'s');//s for selection sort as proof of concept for overloading
+            sort(p2Dice,NUMDICE,'s');   //s for "selection sort" as proof of concept for overloading
             //display p2 Dice
             display(p2Dice,NUMDICE,player2);
 
             //reroll p2 Dice
-            for(int i=1;i<=2;i++){//two turns to reroll p2Dice
-               reRoll(p2Dice);//reroll
-               sort(p2Dice,NUMDICE);//selection sort
+            for(int i=1;i<=2;i++){  //two turns to reroll p2Dice
+               reRoll(p2Dice);      //reroll
+               sort(p2Dice,NUMDICE);    //selection sort
                display(p2Dice,NUMDICE,player2);//display
             }
-            //menu and scoring for p2
-            menu();
+            //menu and scoring for p2   which is essentially the same as p1
+            menu();                 
             scoring(p2Dice,NUMDICE,score,player2,oneTry);
             cout<<endl<<"Your score is: "<<score[player2]<<endl<<endl;
             numRnds.push_back(round+1);
@@ -120,7 +120,7 @@ int main(int argc, char** argv) {
          if(chknDin(score,player1,player2))cout<<"It is a TIE!"<<endl;
          cout<<"Would you like to play again? [Y/N]"<<endl;
          cin>>replay;
-     }while (replay=='y'||replay=='Y');
+     }while (replay=='y'||replay=='Y');    //end of do while loop
      
      cout<<"Thank you for playing!"<<endl;
      
@@ -139,7 +139,7 @@ int main(int argc, char** argv) {
     in.close();
     out.close();
 
-     exit(0);   //this jumps ahead to return 0 which ends the function. i didnt know where else to put it
+     exit(0);   //this goes right to return 0 which ends the function. i didnt know where else to put it
     //Exit Program!
     return 0;
 }
@@ -149,10 +149,10 @@ int main(int argc, char** argv) {
 void roll(int dice[],int die){
     dice[die]=rand()%6+1;
 }
-void sort(int dice[],int NUMDICE){//swaps lowest number to first position
-    for(int i=0;i<NUMDICE-1;i++){//then repeat until all numbers are in order
+void sort(int dice[],int NUMDICE){  //Bubble/Mark sort swaps lowest number to first position
+    for(int i=0;i<NUMDICE-1;i++){   //then repeat until all numbers are in order
         for(int j=i+1;j<NUMDICE;j++){
-            if(dice[j]<dice[i]){
+            if(dice[j]<dice[i]){    //swap logic
                 int temp=dice[i];
                 dice[i]=dice[j];
                 dice[j]=temp;
@@ -160,8 +160,8 @@ void sort(int dice[],int NUMDICE){//swaps lowest number to first position
         }
     }
 }
-void sort(int dice[],int NUMDICE,char s){
-    for(int lstSize=0;lstSize<NUMDICE-1;lstSize++){ //ListSize
+void sort(int dice[],int NUMDICE,char s){           //Selection sort
+    for(int lstSize=0;lstSize<NUMDICE-1;lstSize++){ //ListSize 
         char small=dice[lstSize];
         char indxSml=lstSize;
         for(int findSml=lstSize+1;findSml<NUMDICE;findSml++){
@@ -170,29 +170,29 @@ void sort(int dice[],int NUMDICE,char s){
                 indxSml=findSml;
             }
         }
-        char temp=dice[lstSize];
+        char temp=dice[lstSize];        //swap logic
         dice[lstSize]=dice[indxSml];
         dice[indxSml]=temp;
     }
 }
 void display(int dice[],int NUMDICE,int player){
     cout<<"Player "<<player+1<<" your dice are: ";
-    for(int i=0;i<NUMDICE;i++){//display all 5 dice
+    for(int i=0;i<NUMDICE;i++){     //display all 5 dice
         cout<<dice[i]<<" ";
     }
     cout<<endl;
 }
 void reRoll(int dice[]){
     cout<<"Would you like to reroll any dice? [Y/N]"<<endl;
-    char reroll;//decides whether to reroll or not
-     int numRoll;//number of dice to be rerolled
+    char reroll;    //decides whether to reroll or not
+     int numRoll;   //number of dice to be rerolled
      cin>>reroll;
-     if(reroll=='Y'||reroll=='y'){//if they want to reroll
+     if(reroll=='Y'||reroll=='y'){      //if they want to reroll
          cout<<"How many dice do you want to reroll?"<<endl;
-         cin>>numRoll;//how MANY dice are they rerolling
+         cin>>numRoll;          //how MANY dice are they rerolling
          cout<<"Input which dice to reroll 1-5"<<endl;
-         for(int i=0;i<numRoll;i++){//loop numRoll times
-             int die;//WHICH die they want to reroll
+         for(int i=0;i<numRoll;i++){        //loop numRoll times
+             int die;           //WHICH die they want to reroll
              cin>>die;
              dice[die-1]=rand()%6+1;//reroll the dice
          }
@@ -203,7 +203,7 @@ void menu(){
     cout<<"If you enter the same choice more than once it will add 0 to "<<endl;
     cout<<"your score."<<endl;
     for(int i=1;i<=6;i++){
-        cout<<"For "<<i<<"'s enter ("<<i<<")"<<endl;
+        cout<<"For "<<i<<"'s enter ("<<i<<")"<<endl;    //increments for value 1 - 6 options
     }
     cout<<"For 3 of a kind enter (t)"<<endl;
     cout<<"For 4 of a kind enter (f)"<<endl;
@@ -213,23 +213,23 @@ void menu(){
     cout<<"For a YAHTZEE enter (y)"<<endl;
     cout<<"For a Chance enter (c)"<<endl;
 }
-void scoring(int dice[],int NUMDICE,int score[],int player,
-    bool oneTry[][PLAYERS]){
+void scoring(int dice[],int NUMDICE,int score[],int player,     //calculates score
+    bool oneTry[][PLAYERS]){    //validates whether or not we've filled a score category already
     char choice;
     int count=0;
     cin>>choice;
     switch(choice){
-        case '1':{
+        case '1':{      //UPPER SECTION score categories
             for(int j=0;!oneTry[0][player]&&j<NUMDICE;j++){
-                if(dice[j]==1)count++;
-            }score[player]+=count;oneTry[0][player]=true;break;
+                if(dice[j]==1)count++;                      //searches the array for a specific #, in this case: 1
+            }score[player]+=count;oneTry[0][player]=true;break;     //Cumulative score
         }
-        case '2':{
+        case '2':{  //ditto with case 1 but w/ 2's
             for(int j=0;!oneTry[1][player]&&j<NUMDICE;j++){
                 if(dice[j]==2)count++;
-            }score[player]+=(count*2);oneTry[1][player]=true;break;
+            }score[player]+=(count*2);oneTry[1][player]=true;break; //multiplies how many 2's by 2
         }
-        case '3':{
+        case '3':{  //etc.
             for(int j=0;!oneTry[2][player]&&j<NUMDICE;j++){
                 if(dice[j]==3)count++;
             }score[player]+=(count*3);oneTry[2][player]=true;break;
@@ -249,49 +249,49 @@ void scoring(int dice[],int NUMDICE,int score[],int player,
                 if(dice[j]==6)count++;
             }score[player]+=(count*6);oneTry[5][player]=true;break;
         }
-        case 't':{
+        case 't':{                                              //start of "Lower Section" score categories
             for(int j=0;!oneTry[6][player]&&j<NUMDICE;j++){
-                score[player]+=dice[j];
+                score[player]+=dice[j];                         //Three of a kind Add all dice
             }oneTry[6][player]=true;break;
         }
         case 'f':{
             for(int j=0;!oneTry[7][player]&&j<NUMDICE;j++){
-                score[player]+=dice[j];
+                score[player]+=dice[j];                     //Four of a kind Add all dice
             }oneTry[7][player]=true;break;
         }
         case 'c':{
             for(int j=0;!oneTry[8][player]&&j<NUMDICE;j++){
-                score[player]+=dice[j];
+                score[player]+=dice[j];                     //Chance Add all dice
             }oneTry[8][player]=true;break;
         }
         case 'h':{if(!oneTry[9][player]){
-            score[player]+=25;oneTry[9][player]=true;}break;}
+            score[player]+=25;oneTry[9][player]=true;}break;}   //Full House Score 25
         case 's':{if(!oneTry[10][player]){
-            score[player]+=30;oneTry[10][player]=true;}break;}
+            score[player]+=30;oneTry[10][player]=true;}break;}  //Small Straight Score 30
         case 'l':{if(!oneTry[11][player]){
-            score[player]+=40;oneTry[11][player]=true;}break;}
+            score[player]+=40;oneTry[11][player]=true;}break;}  //Large Straight Score 40
         case 'y':{if(!oneTry[12][player]){
-            score[player]+=50;oneTry[12][player]=true;}break;}
+            score[player]+=50;oneTry[12][player]=true;}break;}  //Yahtzee Score 50
     }
 }
-void scorBrd(vector < int > numRnds,vector < int > p1RndPt,
+void scorBrd(vector < int > numRnds,vector < int > p1RndPt,     //Displays the Scores 
         vector < int > p2RndPt){
     cout<<setw(20)<<"SCOREBOARD"<<endl;
-    cout<<setw(9)<<"Rounds"<<"    "<<setw(9)<<"Player 1"<<"   "
+    cout<<setw(9)<<"Rounds"<<"    "<<setw(9)<<"Player 1"<<"   "//displays each round's cumulative score
             <<setw(9)<<"Player 2"<<endl;
-    for(int i=0;i<numRnds.size();i++){
+    for(int i=0;i<numRnds.size();i++){      //"rounds" increases with each turn hence the .size
         cout<<setw(9)<<"Round "<<numRnds[i];
         cout<<setw(8)<<p1RndPt[i]<<"   ";
         cout<<setw(9)<<p2RndPt[i]<<endl;
     }
 }
-bool chknDin(int score[],int player1,int player2){
+bool chknDin(int score[],int player1,int player2){  //determines winner
     cout<<endl;
-    static string p1="Player 1";
+    static string p1="Player 1";            //needed a static and a string
     static string p2="Player 2";
-    if(score[player1]>score[player2]){
+    if(score[player1]>score[player2]){      //simple score comparison
         cout<<p1<<" is the winner!"<<endl;
-        return false;
+        return false;                       //needed a bool return
     }
     else if(score[player2]>score[player1]){
         cout<<p2<<" is the winner!"<<endl;
